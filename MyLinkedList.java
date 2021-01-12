@@ -43,8 +43,8 @@ public class MyLinkedList{
    }
    else
    {
-     Node front = nodeAt(index - 1);
-     Node back = nodeAt(index);
+     Node front = nodeAt(index);
+     Node back = nodeAt(index + 1);
      front.setNext(insert);
      insert.setNext(back);
      insert.setPrev(front);
