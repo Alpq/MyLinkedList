@@ -13,8 +13,8 @@ public class MyLinkedList{
  {
    Node insert = new Node(value);
    if (size == 0) {this.start = insert; this.end = insert; size ++; return true;}
-   this.end.setNext(insert);
    insert.setPrev(end);
+   this.end.setNext(insert);
    this.end = insert;
    size ++;
    return true;
@@ -56,7 +56,7 @@ public class MyLinkedList{
  private Node nodeAt(int index)
  {
    Node curr = this.start;
-   for (int i = 0; i < index - 1; i ++ ) {
+   for (int i = 0; i <= size && i < index - 1; i ++ ) {
      curr = curr.getNext();
    }
    return curr;
@@ -104,13 +104,19 @@ public class MyLinkedList{
    if (size == 1) { start = new Node(null); end = start ; size --; return out.getData();}
    if (index == 0)
    {
-     this.start = nodeAt(1);
+     Node newstart = new Node(nodeAt(1).getData());
+     newstart.setNext(nodeAt(2));
+     nodeAt(2).setPrev(newstart);
+     start = newstart;
      size --;
      return out.getData();
    }
    else if (index == size)
    {
-     this.end = nodeAt(size - 1);
+     Node newend = new Node(nodeAt(size - 1).getData());
+     newend.setPrev(nodeAt(size - 2));
+     nodeAt(size - 2).setNext(newend);
+     end = newend;
      size --;
      return out.getData();
    }
